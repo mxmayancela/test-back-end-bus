@@ -24,7 +24,7 @@ class CarrierController extends Controller
                 success: true,
                 data: $carriers,
                 status: 200,
-                message: 'Se ha obtenido los transportistas correctamente',
+                message: 'Se ha obtenido los transportistas correctamente CAMBIO  TEST GIT',
                 typeMessage: 'success'
             );
         } catch (\Throwable $th) {
