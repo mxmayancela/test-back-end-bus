@@ -24,7 +24,7 @@ class CarrierController extends Controller
                 success: true,
                 data: $carriers,
                 status: 200,
-                message: 'Se ha obtenido los transportistas correctamente CAMBIO  TEST GIT',
+                message: 'Se ha obtenido los transportistas correctamente Retornando la información',
                 typeMessage: 'success'
             );
         } catch (\Throwable $th) {
@@ -178,4 +178,16 @@ class CarrierController extends Controller
             );
         }
     }
+
+    public function test()
+    {
+        $test=Carrier::with('person')->get();
+        return $this->responseTo(
+            success: true,
+            data: null,
+            status: 200,
+            message: 'Se ha obtenido los transportistas correctamente Retornando la información',
+            typeMessage: 'success'
+        );
+    }	
 }
