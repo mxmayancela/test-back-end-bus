@@ -51,7 +51,7 @@ trait ResponseFormatTrait
     {
         $response = self::responseTo(
             success: false, data: ['code_error' => 300, 'errors_validations_fields' => $errors],
-            status: 422, message: __('messages.failed_validation'), typeMessage: 'danger'
+            status: 422, message: 'Error en la validación de datos', typeMessage: 'danger'
         );
         throw new HttpResponseException($response);
     }

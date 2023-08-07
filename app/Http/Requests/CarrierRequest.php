@@ -39,7 +39,7 @@ class CarrierRequest extends FormRequest
             'lastnamefather' => 'required|string|max:255',
             'lastnamemother' => 'required|string|max:255',
             'cedula' => 'required|string|max:13|unique:persons',
-            'birthdate' => 'required|date|max:255',
+            'birthdate' => 'required|date|date_format:Y-m-d',
             'license' => 'required|string|max:255|unique:carriers',
         ];
         $rulesNull= [
@@ -47,7 +47,7 @@ class CarrierRequest extends FormRequest
             'lastnamefather' => 'nullable|string|max:255',
             'lastnamemother' => 'nullable|string|max:255',
             'cedula' => 'nullable|string|max:13',
-            'birthdate' => 'nullable|date|max:255',
+            'birthdate' => 'nullable|date|date_format:Y-m-d',
             'license' => 'nullable|string|max:255',
         ];
         return match ($this->method()) {
@@ -65,6 +65,34 @@ class CarrierRequest extends FormRequest
             'cedula' => 'cedula',
             'birthdate' => 'fecha de nacimiento',
             'license' => 'licencia',
+        ];
+    }
+
+    public function  messages()
+    {
+        return [
+          'name.required' => 'El campo :attribute es requerido',
+            'lastnamefather.required' => 'El campo :attribute es requerido',
+            'lastnamemother.required' => 'El campo :attribute es requerido',
+            'cedula.required' => 'El campo :attribute es requerido',
+            'birthdate.required' => 'El campo :attribute es requerido',
+            'license.required' => 'El campo :attribute es requerido',
+            'name.string' => 'El :attribute debe ser una cadena de caracteres',
+            'lastnamefather.string' => 'El :attribute debe ser una cadena de caracteres',
+            'lastnamemother.string' => 'El :attribute debe ser una cadena de caracteres',
+            'cedula.string' => 'El :attribute debe ser una cadena de caracteres',
+            'birthdate.string' => 'El :attribute debe ser una cadena de caracteres',
+            'license.string' => 'El :attribute debe ser una cadena de caracteres',
+            'name.max' => 'El :attribute debe tener un máximo de 255 caracteres',
+            'lastnamefather.max' => 'El :attribute debe tener un máximo de 255 caracteres',
+            'lastnamemother.max' => 'El :attribute debe tener un máximo de 255 caracteres',
+            'cedula.max' => 'El :attribute debe tener un máximo de 13 caracteres',
+            'license.max' => 'El :attribute debe tener un máximo de 255 caracteres',
+            'cedula.unique' => 'El :attribute ya existe',
+            'license.unique' => 'El :attribute ya existe',
+            'birthdate.date' => 'El :attribute debe ser una fecha',
+            'birthdate.date_format' => 'El :attribute debe tener el formato Y-m-d',
+
         ];
     }
 }

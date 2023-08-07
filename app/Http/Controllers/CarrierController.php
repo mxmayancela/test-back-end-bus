@@ -13,7 +13,7 @@ class CarrierController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        //$this->middleware('auth:api');
     }
 
     public function index()
@@ -48,8 +48,7 @@ class CarrierController extends Controller
             $person->lastnamemother = $request->lastnamemother;
             $person->cedula = $request->cedula;
             $person->birthdate = $request->birthdate;
-            $person->save();
-            if ($person) {
+            if ( $person->save()) {
                 $carrier = new Carrier();
                 $carrier->license = $request->license;
                 $carrier->id_person = $person->id;
@@ -66,7 +65,6 @@ class CarrierController extends Controller
         } catch (\Throwable $th) {
             return $this->responseTo(
                 success: false,
-                data: null,
                 status: 500,
                 message: $th->getMessage(),
                 typeMessage: 'danger'
@@ -189,5 +187,5 @@ class CarrierController extends Controller
             message: 'Se ha obtenido los transportistas correctamente Retornando la información',
             typeMessage: 'success'
         );
-    }	
+    }
 }

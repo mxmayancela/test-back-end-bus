@@ -29,7 +29,7 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Invalid credentials'
         ], 402);
-      
+
     }
 
     public function register(Request $request)
@@ -40,7 +40,8 @@ class AuthController extends Controller
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:6',
             ]);
-    
+
+
             $person=Person::create([
                 'name' => $request->name,
                 'lastnamefather' => $request->lastnamefather,
@@ -48,7 +49,7 @@ class AuthController extends Controller
                 'cedula' => $request->cedula,
                 'birthdate' => $request->birthdate,
             ]);
-    
+
             if ($person) {
                 $user = User::create([
                     'email' => $request->email,
@@ -56,16 +57,18 @@ class AuthController extends Controller
                     'id_person' => $person->id,
                 ]);
             }
-           
+
             return response()->json([
+                'success' => true,
                 'message' => 'User created successfully',
-                'user' => $user
+                'typeMessage' => 'success'
             ]);
         } catch (\Throwable $th) {
             return response()->json([
-                'message' => 'Error creating user',
-                'error' => $th->getMessage()
-            ], 500);
+                'success' => false,
+                'message' => $th->getMessage(),
+                'data' => $th
+            ]);
         }
     }
 
